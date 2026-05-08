@@ -2,10 +2,16 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
-const cookieParser = require('cookie-parser');  
+const cookieParser = require("cookie-parser");
 
-app.use(cors({credentials: true, origin: 'https://gauravpasswordmanager.netlify.app'}));
-app.use(cookieParser());   
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://gauravpasswordmanager.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+  }),
+);
+app.use(cookieParser());
 
 // SETTING UP DOTENV
 dotenv.config({ path: "./config.env" });
@@ -17,15 +23,10 @@ require("./db/connection");
 
 app.use(express.json());
 
-
-// LINKING THE ROUTER FILES 
+// LINKING THE ROUTER FILES
 app.use(require("./router/routing"));
 
-
-
-
-// LISTENING TO PORT 
-app.listen(PORT, () =>
-{
-    console.log(`listening to port : http://localhost:${PORT}/`)
-})
+// LISTENING TO PORT
+app.listen(PORT, () => {
+  console.log(`listening to port : http://localhost:${PORT}/`);
+});
