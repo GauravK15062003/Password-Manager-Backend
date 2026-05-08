@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 app.use(
   cors({
     credentials: true,
-    origin: "https://sensational-chebakia-30debd.netlify.app",
+    origin: "https://gauravpasswordmng.netlify.app",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
   }),
 );
