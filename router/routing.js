@@ -93,6 +93,20 @@ router.post("/addnewpassword", authenticate, async (req, res) => {
 
     const { iv, encryptedPassword } = encrypt(userPass);
 
+    // Line 94 ke baad ye logic add kijiye:
+
+    const isDuplicate = rootUser.passwords.find(
+      (p) => p.platform === platform && p.platEmail === platEmail,
+    );
+
+    if (isDuplicate) {
+      return res
+        .status(400)
+        .json({ error: "This password entry already exists." });
+    }
+
+    // Uske baad hi encrypt aur save wala logic chale
+
     const isSaved = await rootUser.addNewPassword(
       encryptedPassword,
       iv,
